@@ -73,8 +73,34 @@ button {
   color: var(--color-white);
   text-transform: lowercase;
   display: flex;
-  gap: 34px;
-  font-weight: 500;
+  gap: 20px;
+  font-weight: 600;
+}
+
+.nav-links a {
+  position: relative;
+  padding: 6px;
+}
+
+.nav-links a::after,
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background-color: var(--color-white);
+  opacity: 0;
+
+  transition-property: opacity;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus::after {
+  opacity: 1;
 }
 
 /* silder buttons */
@@ -84,6 +110,7 @@ button {
   flex-direction: row;
   align-self: end;
   justify-content: end;
+  z-index: 1;
 }
 
 .slider-button {
@@ -93,6 +120,15 @@ button {
   display: grid;
   place-items: center;
   cursor: pointer;
+
+  transition-property: background-color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+}
+
+.slider-button:hover,
+.slider-button:focus {
+  background-color: var(--color-darkgray);
 }
 
 .slider-button img {
@@ -121,6 +157,15 @@ h1 {
   gap: 16px;
   align-items: center;
   margin-top: 20px;
+
+  transition-property: color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+}
+
+.shop-link:hover,
+.shop-link:focus {
+  color: var(--color-gray);
 }
 
 /* about panel */
@@ -161,10 +206,6 @@ h2 {
 /* tablet style */
 
 @media (min-width: 600px) and (max-width: 900px) {
-  .slider-control {
-    /* justify-content: start; */
-  }
-
   .about-img-dark {
     object-position: 85% center;
   }
