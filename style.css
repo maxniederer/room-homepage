@@ -161,6 +161,13 @@ h1 {
   transition-property: color;
   transition-duration: 150ms;
   transition-timing-function: ease-in-out;
+
+  /* position: relative; */
+}
+
+.shop-link svg {
+  position: relative;
+  top: -2px;
 }
 
 .shop-link:hover,
@@ -252,7 +259,7 @@ h2 {
   }
 
   .slider-text {
-    padding: min(120px, 8vw) min(100px, 7vw);
+    padding: min(120px, 9vw) min(100px, 6vw);
   }
 
   .about {
