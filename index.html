@@ -12,22 +12,36 @@
       href="./images/favicon-32x32.png"
     />
 
-    <title>Frontend Mentor | Room homepage</title>
+    <title>room | Frontend Mentor Challenge</title>
 
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
+
+    <script src="nav.js" defer></script>
   </head>
   <body>
     <main>
       <div class="main-grid">
         <div class="slider-img">
-          <header class="top-nav">
+          <header class="top-navbar">
+            <button
+              aria-controls="top-navbar"
+              data-expanded="false"
+              class="hamburger"
+              id="hamburger"
+            >
+              <span class="sr-only">Menu</span>
+            </button>
+
             <img src="images/logo.svg" alt="logo" width="62px" height="14px" />
-            <nav class="nav-links">
-              <a href="#">Home</a>
-              <a href="#">Shop</a>
-              <a href="#">About</a>
-              <a href="#">Contact</a>
+
+            <nav>
+              <ul id="nav-links" class="nav-links" aria-expanded="false">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
             </nav>
           </header>
           <img
@@ -48,7 +62,7 @@
           <button class="slider-button">
             <img
               src="images/icon-angle-right.svg"
-              alt="left"
+              alt="right"
               width="14px"
               height="24px"
             />
@@ -82,12 +96,9 @@
             </p>
             <a class="shop-link caps" href="#">
               Shop Now
-              <img
-                src="images/icon-arrow.svg"
-                alt="arrow"
-                width="40px"
-                height="12px"
-              />
+              <svg width="40px" height="12px" aria-hidden="true">
+                <use href="images/icon-arrow.svg#shop-arrow"></use>
+              </svg>
             </a>
           </article>
           <article class="slider-3 hidden">
@@ -101,12 +112,9 @@
             </p>
             <a class="shop-link caps" href="#">
               Shop Now
-              <img
-                src="images/icon-arrow.svg"
-                alt="arrow"
-                width="40px"
-                height="12px"
-              />
+              <svg width="40px" height="12px" aria-hidden="true">
+                <use href="images/icon-arrow.svg#shop-arrow"></use>
+              </svg>
             </a>
           </article>
         </div>
@@ -142,7 +150,13 @@
               href="https://www.frontendmentor.io?ref=challenge"
               target="_blank"
               >Frontend Mentor</a
-            >. Coded by <a href="#">Max Niederer</a>.
+            >. Coded by
+            <a
+              href="https://github.com/maxniederer"
+              target="_blank"
+              rel="noreferrer noopener"
+              >Max Niederer</a
+            >.
           </div>
         </div>
       </div>

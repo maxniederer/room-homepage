@@ -41,6 +41,8 @@ a {
 
 button {
   border: none;
+  background: none;
+  cursor: pointer;
 }
 
 /* helper classes */
@@ -59,14 +61,24 @@ button {
   display: none;
 }
 
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 /* nav */
 
-.top-nav {
+.top-navbar {
   display: flex;
   position: absolute;
   align-items: center;
   gap: 56px;
   margin: 64px;
+  z-index: 2;
 }
 
 .nav-links {
@@ -75,6 +87,9 @@ button {
   display: flex;
   gap: 20px;
   font-weight: 600;
+  letter-spacing: -0.05em;
+
+  list-style: none;
 }
 
 .nav-links a {
@@ -87,20 +102,106 @@ button {
   content: "";
   position: absolute;
   bottom: 0px;
-  left: 25%;
-  width: 50%;
   height: 2px;
   background-color: var(--color-white);
-  opacity: 0;
 
-  transition-property: opacity;
+  left: 50%;
+  width: 0%;
+  opacity: 0;
+  transition-property: left, width, opacity;
   transition-duration: 150ms;
-  transition-timing-function: ease-in-out;
+  transition-timing-function: ease-out;
 }
 
 .nav-links a:hover::after,
 .nav-links a:focus::after {
+  left: 25%;
+  width: 50%;
   opacity: 1;
+}
+
+.hamburger {
+  display: none;
+
+  position: absolute;
+  left: 0;
+  z-index: 9999;
+
+  width: 20px;
+  aspect-ratio: 1;
+  background-image: url("images/icon-hamburger.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+
+  transform: rotate(0deg);
+  transition: transform;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+}
+
+/* mobile collapsible navigation */
+/* (using max-width to avoid collapsing nav behavior leaking to desktop view) */
+
+@media (max-width: 37.5em) {
+  .top-navbar {
+    margin-inline: max(24px, 10vw - 14px);
+    margin-block: 48px;
+    gap: 0;
+    justify-content: center;
+
+    /* stretches absolute positioned element to full width */
+    left: 0;
+    right: 0;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .hamburger[data-expanded="true"] {
+    background-image: url("images/icon-close.svg");
+    transform: rotate(180deg);
+
+    position: fixed;
+    left: max(24px, 10vw - 14px);
+    top: 44px;
+  }
+
+  .nav-links {
+    position: fixed;
+    inset: 0 0 0 0;
+    padding-inline: max(24px, 10vw - 14px);
+
+    height: 110px;
+    align-items: center;
+    justify-content: end;
+
+    background-color: var(--color-white);
+    color: black;
+
+    transform: translateY(-100%);
+    transition: transform;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
+  }
+
+  .nav-links[aria-expanded="true"] {
+    transform: translateY(0%);
+    gap: min(20px, 15vw - 40px);
+  }
+
+  .nav-links[aria-expanded="true"]::after {
+    content: "";
+    position: fixed;
+    inset: 110px 0 0 0;
+    height: 100svh;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-links a::after,
+  .nav-links a::after {
+    background-color: var(--color-black);
+  }
 }
 
 /* silder buttons */
@@ -119,7 +220,6 @@ button {
   width: max(10vw, 4rem);
   display: grid;
   place-items: center;
-  cursor: pointer;
 
   transition-property: background-color;
   transition-duration: 150ms;
@@ -132,7 +232,7 @@ button {
 }
 
 .slider-button img {
-  /* width: 15%; */
+  /* width: 17.5%; */
   /* height: auto; */
 }
 
@@ -161,8 +261,6 @@ h1 {
   transition-property: color;
   transition-duration: 150ms;
   transition-timing-function: ease-in-out;
-
-  /* position: relative; */
 }
 
 .shop-link svg {
@@ -211,8 +309,9 @@ h2 {
 }
 
 /* tablet style */
+/* (using max-width to avoid grid behavior leaking to desktop view) */
 
-@media (min-width: 600px) and (max-width: 900px) {
+@media (min-width: 37.5em) and (max-width: 56.25em) {
   .about-img-dark {
     object-position: 85% center;
   }
@@ -249,7 +348,7 @@ h2 {
 
 /* desktop style */
 
-@media (min-width: 900px) {
+@media (min-width: 56.25em) {
   .slider-control {
     justify-content: start;
   }
@@ -307,4 +406,11 @@ h2 {
 
 .attribution a {
   color: hsl(228, 45%, 44%);
+  transition-property: color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+}
+
+.attribution a:hover {
+  color: var(--color-black);
 }
