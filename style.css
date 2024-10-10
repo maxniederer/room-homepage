@@ -8,10 +8,6 @@
   --color-white: hsl(0, 0%, 100%);
   --color-darkgray: hsl(0, 0%, 27%);
 
-  /* dark mode */
-  /* --color-black: hsl(0, 0%, 50%); */
-  /* --color-white: hsl(0, 0%, 0%); */
-
   --font: "League Spartan", sans-serif;
 }
 
@@ -58,7 +54,8 @@ button {
 }
 
 .hidden {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .sr-only {
@@ -68,6 +65,10 @@ button {
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+
+.preload * {
+  transition: none !important;
 }
 
 /* nav */
@@ -113,8 +114,7 @@ button {
   transition-timing-function: ease-out;
 }
 
-.nav-links a:hover::after,
-.nav-links a:focus::after {
+.nav-links a:hover::after {
   left: 25%;
   width: 50%;
   opacity: 1;
@@ -226,8 +226,7 @@ button {
   transition-timing-function: ease-in-out;
 }
 
-.slider-button:hover,
-.slider-button:focus {
+.slider-button:hover {
   background-color: var(--color-darkgray);
 }
 
@@ -236,12 +235,34 @@ button {
   /* height: auto; */
 }
 
-/* description panel */
+/* slider imgs */
+
+.slider-img-holder {
+  display: grid;
+}
+
+.slider-img {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+/* slider text */
+
+.slider-text-holder {
+  display: grid;
+  place-items: center;
+}
 
 .slider-text {
   padding: 62px 32px;
-  display: grid;
-  place-items: center;
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+.slider-transition {
+  transition-property: opacity, visibility;
+  transition-timing-function: ease;
+  transition-duration: 350ms;
 }
 
 h1 {
@@ -268,8 +289,7 @@ h1 {
   top: -2px;
 }
 
-.shop-link:hover,
-.shop-link:focus {
+.shop-link:hover {
   color: var(--color-gray);
 }
 
@@ -409,8 +429,28 @@ h2 {
   transition-property: color;
   transition-duration: 150ms;
   transition-timing-function: ease-in-out;
+
+  position: relative;
+  padding-block: 2px;
 }
 
-.attribution a:hover {
-  color: var(--color-black);
+.attribution a::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  height: 1px;
+  background-color: hsl(228, 45%, 44%);
+
+  left: 50%;
+  width: 0%;
+  opacity: 0;
+  transition-property: left, width, opacity;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+.attribution a:hover::after {
+  width: 80%;
+  left: 10%;
+  opacity: 1;
 }
